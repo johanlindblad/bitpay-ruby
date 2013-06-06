@@ -22,11 +22,11 @@ module BitPayRuby
       @currency = currency
     end
 
-    def create
-      response = BitPayRuby::connection.post "/api/invoice", {
+    def create extra_parameters = {}
+      response = BitPayRuby::connection.post "/api/invoice", ({
         "price" => price,
         "currency" => currency
-      }
+      }.merge(extra_parameters))
       update! response.body
       self
     end
